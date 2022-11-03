@@ -28,9 +28,9 @@ SECRET_KEY = config["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['unbot-2khrcwnj2q-uk.a.run.app', '*']
+ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://unbot-2khrcwnj2q-uk.a.run.app', 'https://unbot-2khrcwnj2q-uk.a.run.app/upload']
+CSRF_TRUSTED_ORIGINS = []
 
 # Application definition
 

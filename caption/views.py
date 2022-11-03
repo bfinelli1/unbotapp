@@ -70,6 +70,8 @@ def process(lines, num_images, search_term, color, fontsize, fonttype):
     if not r:
         response = HttpResponseBadRequest(r.text)
         return response
+    lenlines = len(lines)
+    lineidx=0
     for entry in r.json():
         img_data = requests.get(entry['urls']['regular']).content
 
@@ -82,11 +84,13 @@ def process(lines, num_images, search_term, color, fontsize, fonttype):
         myFont = ImageFont.truetype(font=fonttype, size=fontsize)
 
         offset=top_margin
-        randlines = random.choice(lines)
-        for line in wrapword(randlines, img.width-(side_margin*2), myFont):
+        line = lines[lineidx]
+        for line in wrapword(line, img.width-(side_margin*2), myFont):
             I1.text((side_margin,offset), line, color, font=myFont)
-            offset+=myFont.getsize(randlines)[1]+10
-        
+            offset+=myFont.getsize(line)[1]+10
+        lineidx+=1
+        if lineidx >= lenlines:
+            lineidx=0
         name = entry['user']['name']
         name = re.sub(r'[^a-zA-Z -.]', '', name)
         myFont = ImageFont.truetype(font=font_name, size=name_size)

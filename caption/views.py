@@ -104,7 +104,7 @@ def process(lines, num_images, search_term, color, fontsize, fonttype):
             return response
         else:
             images_tuple.append(
-                ("image" + name + str(count) + ".jpg", get_image_buffer(img))
+                (str(count) + " " + name + ".jpg", get_image_buffer(img))
             )
             count+=1
 

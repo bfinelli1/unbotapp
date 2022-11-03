@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<style>
+
+</style>
+
+<body style="background-color:#014e7d;">
+    
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.57/dist/themes/light.css">
+    <script type="module"
+        src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.57/dist/shoelace.js/+esm"></script>
+
+
+
+
+    <h1 style="text-align: center;font-family:sans-serif;">Random Captionator</h1>
+
+
+    <form style="text-align: center;" method="post" action="{% url 'upload' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <br>
+        <h4 style="text-align: center;font-family:sans-serif;"></h4>
+        <h4 style="text-align: center;font-family:sans-serif;">Submit text separated by carriage returns in the text
+            box below OR select a text file with individual lines separated by carriage returns.</h4>
+        <br>
+
+        <!-- <form style="text-align: center;" method="post" action="{% url 'upload' %}"> -->
+        <div style="display:flex;justify-content: center;">
+            <textarea class="form-control" style="width:600px;height:100px;" id="text" name="text-body"
+                placeholder="Space, the final frontier."></textarea>
+                <input type="submit" class="btn btn-primary" value="Submit" name="text" />
+                <h2>&nbsp;&nbsp;&nbsp;--OR--&nbsp;&nbsp;&nbsp;</h2>
+                <input style="border: 1px solid black;" type="file" name="file" />
+        <input class="btn btn-primary" type="submit" name="fileupload" value="Upload" />
+        </div> 
+        <br>
+        <h4 style="text-align: center;font-family:sans-serif;">Select how many random images to apply your text randomly
+            to (up to 10)</h4>
+        <h4 style="text-align: center;font-family:sans-serif;">as well as a search term. Or leave blank.</h4>
+
+        <select name="dropdown">
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+
+        <input type="text" name="searchterm" placeholder="Search term">
+        <br>
+        <hr>
+        <h3 style="text-align: center;font-family:sans-serif;">Select text color:</h3>
+
+
+        <h3 style="text-align: center;font-family:sans-serif;">Choose font color, font size (default is 70) and font
+            type</h3>
+        <div style="display:flex;justify-content:center;">
+            <input style="width:60px;height:40px;" class="form-control form-control-color" id="color" name="color"
+                value="#b4b4b4" type="color" />
+
+            <input type="number" step="1" name="fontsize" value="70">
+            <select name="fonttype">
+                <option style="font-family: Arial" value="arial.ttf" selected>Arial</option>
+                <option style="font-family: Calibri" value="calibri.ttf">Calibri</option>
+                <option style="font-family: Cambria" value="cambria.ttc">Cambria</option>
+                <option style="font-family: Courier New" value="cour.ttf">Courier New</option>
+                <option style="font-family: Times New Roman" value="times.ttf">Times New Roman</option>
+                <option style="font-family: Krylon" value="Krylon.otf">Krylon</option>
+                <option value="BluesAnthem.ttf">Blues Anthem</option>
+                <option value="Boyflare.ttf">Boy Flare</option>
+                <option value="Letteriot.ttf">Letteriot</option>
+                <option value="Love-aster.otf">Love-aster</option>
+                <option value="Roustel.ttf">Roustel</option>
+                <option value="warriot.ttf">warriot</option>
+            </select>
+        </div>
+
+    </form>
+    <br>
+</body>
+
+</html>

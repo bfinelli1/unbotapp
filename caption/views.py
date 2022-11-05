@@ -1,17 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
-import requests, io, random, os, re, zipfile
+import requests, io, os, re, zipfile
 from PIL import Image, ImageDraw, ImageFont
 from django.utils.encoding import smart_str
 from dotenv import load_dotenv
 load_dotenv()
 
-font_name="fonts/calibri.ttf"
+font_name="fonts/arial.ttf"
 name_size=20
-text_size=70
 side_margin=40
 top_margin=40
-text_line_width=30
 Red=150
 Green=150
 Blue=150
@@ -64,7 +62,7 @@ def upload(request):
 def process(lines, num_images, search_term, color, fontsize, fonttype):
     images = []
     images_tuple = []
-    count = 0
+    count = 1
     r = requests.get(f'https://api.unsplash.com/photos/random?query={search_term}&count={num_images}',
     headers={'Authorization': f'Client-ID {os.getenv("Client-ID")}'})
     if not r:
@@ -92,15 +90,20 @@ def process(lines, num_images, search_term, color, fontsize, fonttype):
         if lineidx >= lenlines:
             lineidx=0
         name = entry['user']['name']
+        
+        desc=""
+        if entry['alt_description'] is None:
+            desc = search_term
+        else:
+            desc = entry['alt_description']
         name = re.sub(r'[^a-zA-Z -.]', '', name)
         myFont = ImageFont.truetype(font=font_name, size=name_size)
         I1.text((10,10), f"image by: {name}", (Red,Green,Blue), font=myFont)
-        name = str(entry['alt_description'])+ " " + name
-        name = name[:120]
+        name = desc[:100] + " " + name
         if int(num_images) == 1:
             response = HttpResponse(content_type='application/force-download') 
             img.save(response, "JPEG")
-            response['Content-Disposition'] = 'attachment; filename="{}"'.format(f"{name}.jpg")
+            response['Content-Disposition'] = 'attachment; filename="{}"'.format(f"{name[:120]}.jpg")
             return response
         else:
             images_tuple.append(
@@ -111,7 +114,7 @@ def process(lines, num_images, search_term, color, fontsize, fonttype):
     # put images into a zip file
     full_zip_in_memory = generate_zip(images_tuple)
     response = HttpResponse(full_zip_in_memory, content_type='application/force-download')
-    response['Content-Disposition'] = 'attachment; filename="{}"'.format('images.zip')
+    response['Content-Disposition'] = 'attachment; filename="{}"'.format(f'{search_term[:100]}Images.zip')
     return response
 
 def get_image_buffer(image):

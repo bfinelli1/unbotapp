@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -7,23 +8,20 @@
 <style>
 
 </style>
+<title>Random Captionator</title>
 
-<body style="background-color:#014e7d;">
-    
+<body style="background:#333;color:rgb(182, 182, 182)">
+
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.57/dist/themes/light.css">
     <script type="module"
         src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.57/dist/shoelace.js/+esm"></script>
 
-
-
-
     <h1 style="text-align: center;font-family:sans-serif;">Random Captionator</h1>
-
 
     <form style="text-align: center;" method="post" action="{% url 'upload' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        
+
         <br>
         <h4 style="text-align: center;font-family:sans-serif;"></h4>
         <h4 style="text-align: center;font-family:sans-serif;">Submit text separated by carriage returns in the text
@@ -32,14 +30,16 @@
 
         <!-- <form style="text-align: center;" method="post" action="{% url 'upload' %}"> -->
         <div style="display:flex;justify-content: center;">
-            <textarea class="form-control" style="width:600px;height:100px;" id="text" name="text-body">First Line&#10;Second line&#10;Third line</textarea>
-                <input type="submit" class="btn btn-primary" value="Submit" name="text" />
-                <h2>&nbsp;&nbsp;&nbsp;--OR--&nbsp;&nbsp;&nbsp;</h2>
-                <input style="border: 1px solid black;" type="file" name="file" />
-        <input class="btn btn-primary" type="submit" name="fileupload" value="Upload" />
-        </div> 
+            <textarea class="form-control" style="width:600px;height:100px;" id="text"
+                name="text-body">First Line&#10;Second line&#10;Third line</textarea>
+            <input type="submit" class="btn btn-primary" value="Submit" name="text" />
+            <h2>&nbsp;&nbsp;&nbsp;--OR--&nbsp;&nbsp;&nbsp;</h2>
+            <input style="border: 1px solid black;" type="file" name="file" />
+            <input class="btn btn-primary" type="submit" name="fileupload" value="Upload" />
+        </div>
         <br>
-        <h4 style="text-align: center;font-family:sans-serif;">Select how many random images to apply your text to in sequence (up to 10)</h4>
+        <h4 style="text-align: center;font-family:sans-serif;">Select how many random images to apply your text to in
+            sequence (up to 10)</h4>
         <h4 style="text-align: center;font-family:sans-serif;">as well as a search term. Or leave blank.</h4>
 
         <select name="dropdown">
@@ -60,7 +60,6 @@
         <hr>
         <h3 style="text-align: center;font-family:sans-serif;">Select text color:</h3>
 
-
         <h3 style="text-align: center;font-family:sans-serif;">Choose font color, font size (default is 70) and font
             type</h3>
         <div style="display:flex;justify-content:center;">
@@ -74,6 +73,8 @@
                 <option style="font-family: Cambria" value="cambria.ttc">Cambria</option>
                 <option style="font-family: Courier New" value="cour.ttf">Courier New</option>
                 <option style="font-family: Times New Roman" value="times.ttf">Times New Roman</option>
+                <option value="GothamUltra.otf">Gotham Ultra</option>
+                <option value="BebasNeue-Regular.ttf">Bebas Neue</option>
                 <option style="font-family: Krylon" value="Krylon.otf">Krylon</option>
                 <option value="BluesAnthem.ttf">Blues Anthem</option>
                 <option value="Boyflare.ttf">Boy Flare</option>
@@ -83,6 +84,24 @@
                 <option value="warriot.ttf">warriot</option>
             </select>
         </div>
+
+        <hr>
+        <div style="display:flex;justify-content:center;">
+            <table>
+                <tr>
+                    <td>Left margin</td>
+                    <td>Top margin</td>
+                    <td>Right margin</td>
+                </tr>
+                <tr>
+                    <td><input type="number" step="1" name="left-margin" value="40"></td>
+                    <td><input type="number" step="1" name="top-margin" value="40"></td>
+                    <td><input type="number" step="1" name="right-margin" value="200"></td>
+                </tr>
+            </table>
+        </div>
+
+
 
     </form>
     <br>

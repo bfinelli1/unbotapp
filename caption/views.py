@@ -113,7 +113,7 @@ def process(lines, num_images, search_term, color, fontsize, fonttype,
             I1.text((left_margin-1, offset+1), line, "#333", font=myFont)
             I1.text((left_margin+1, offset+1), line, "#333", font=myFont)
             I1.text((left_margin, offset), line, color, font=myFont)
-            offset += myFont.getsize(line)[1] + 10
+            offset += myFont.getbbox(line)[3] + 10
         lineidx += 1
         if lineidx >= lenlines:
             lineidx = 0
@@ -174,9 +174,9 @@ def wrapword(text, width, myFont):
     lines = ['']
     for word in text.split():
         line = f'{lines[-1]} {word}'.strip()
-        if myFont.getsize(line)[0] < width:
+        if myFont.getbbox(line)[2] < width:
             lines[-1] = line
-        elif myFont.getsize(word)[0] > width:
+        elif myFont.getbbox(word)[2] > width:
             return ""
         else:
             lines.append(word)
